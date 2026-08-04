@@ -3,7 +3,7 @@
 # Drop this into any workflow to score the repository on every push, comment the
 # report on pull requests, or fail the build when quality regresses:
 #
-#   - uses: mornrain-lin/repo-radar@v1
+#   - uses: mornrain-lin/repo-radar@v1.0.0
 #     with:
 #       min-score: 75
 #

@@ -362,7 +362,7 @@ jobs:
   radar:
     runs-on: ubuntu-latest
     steps:
-      - uses: mornrain-lin/repo-radar@v1
+      - uses: mornrain-lin/repo-radar@v1.0.0
         with:
           min-score: 75          # fail the build if quality regresses
           format: markdown       # also posted to the job summary

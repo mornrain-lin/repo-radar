@@ -332,7 +332,7 @@ jobs:
   radar:
     runs-on: ubuntu-latest
     steps:
-      - uses: mornrain-lin/repo-radar@v1
+      - uses: mornrain-lin/repo-radar@v1.0.0
         with:
           min-score: 75          # 质量回退时让构建失败
           format: markdown       # 同时发布到 job summary
