@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RepoRadar — sindresorhus/ky</title>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #84cc16;
+    --pass: #3fb950; --warn: #d29922; --fail: #f85149; --error: #bc8cff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 40px 20px; background: var(--bg); color: var(--text);
+    font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; }
+  a { color: #58a6ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero { display: flex; gap: 32px; align-items: center; flex-wrap: wrap;
+          background: var(--panel); border: 1px solid var(--border);
+          border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+  .gauge { width: 150px; height: 150px; flex: none; }
+  .gauge-score { fill: var(--text); font-size: 40px; font-weight: 700; }
+  .gauge-total { fill: var(--muted); font-size: 14px; }
+  .hero-info h1 { margin: 0 0 6px; font-size: 26px; }
+  .hero-info .desc { color: var(--muted); margin: 0 0 14px; max-width: 52ch; }
+  .grade { display: inline-block; background: var(--accent); color: #0d1117;
+           font-weight: 700; padding: 4px 14px; border-radius: 999px; margin-right: 10px; }
+  .facts { color: var(--muted); font-size: 13px; margin-top: 12px; }
+  .facts span { margin-right: 16px; }
+
+  .card { background: var(--panel); border: 1px solid var(--border);
+          border-radius: 14px; padding: 22px 26px; margin-bottom: 18px; }
+  .card-head { display: flex; justify-content: space-between; align-items: center; }
+  .card-head h2 { margin: 0; font-size: 17px; }
+  .score-chip { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 14px; }
+  .card-sub { color: var(--muted); font-size: 13px; margin: 4px 0 12px; }
+  .track { height: 6px; background: rgba(255,255,255,.07); border-radius: 999px; overflow: hidden; }
+  .fill { height: 100%; background: var(--accent); border-radius: 999px; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+  td { padding: 9px 8px; border-top: 1px solid var(--border); vertical-align: top; font-size: 14px; }
+  td:first-child { width: 62px; }
+  .check-title { width: 210px; font-weight: 600; }
+  .check-msg { color: var(--muted); }
+  .hint { color: #6e7681; font-size: 12.5px; margin-top: 4px; font-style: italic; }
+  .pts { text-align: right; width: 74px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .dim { color: #6e7681; }
+
+  .pill { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em;
+          padding: 2px 7px; border-radius: 4px; }
+  .pill.pass  { background: rgba(63,185,80,.16);  color: var(--pass); }
+  .pill.warn  { background: rgba(210,153,34,.16); color: var(--warn); }
+  .pill.fail  { background: rgba(248,81,73,.16);  color: var(--fail); }
+  .pill.error { background: rgba(188,140,255,.16); color: var(--error); }
+
+  ol.fixes { list-style: none; padding: 0; margin: 0; counter-reset: fix; }
+  ol.fixes li { border-top: 1px solid var(--border); padding: 14px 0; }
+  ol.fixes li:first-child { border-top: none; }
+  .fix-head { display: flex; align-items: center; gap: 10px; }
+  .rank { background: rgba(255,255,255,.08); width: 22px; height: 22px; border-radius: 50%;
+          display: grid; place-items: center; font-size: 12px; color: var(--muted); flex: none; }
+  .gain { margin-left: auto; color: var(--pass); font-weight: 700; font-size: 13px; }
+  .fix-now { color: var(--muted); font-size: 13.5px; margin: 4px 0 0 32px; }
+  .fix-hint { color: #8b949e; font-size: 13.5px; margin: 6px 0 0 32px;
+              border-left: 2px solid var(--accent); padding-left: 10px; }
+
+  footer { color: #6e7681; font-size: 12.5px; text-align: center; margin-top: 30px; }
+  @media (max-width: 620px) { .hero { flex-direction: column; text-align: center; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <svg viewBox="0 0 160 160" class="gauge" role="img" aria-label="Score 78.9 out of 100">
+  <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="12"/>
+  <circle cx="80" cy="80" r="68" fill="none" stroke="#84cc16" stroke-width="12"
+          stroke-linecap="round" stroke-dasharray="427.26"
+          stroke-dashoffset="90.15" transform="rotate(-90 80 80)"/>
+  <text x="80" y="76" text-anchor="middle" class="gauge-score">79</text>
+  <text x="80" y="98" text-anchor="middle" class="gauge-total">/ 100</text>
+</svg>
+    <div class="hero-info">
+      <h1><a href="https://github.com/sindresorhus/ky">sindresorhus/ky</a></h1>
+      <p class="desc">🌳 Tiny &amp; elegant JavaScript HTTP client based on the Fetch API</p>
+      <div>
+        <span class="grade">B</span>
+        <span>Solid</span>
+      </div>
+      <div class="facts">
+        <span>★ 17,011</span>
+        <span>⑂ 485</span>
+        <span>◉ 0 open</span>
+        <span>⬤ TypeScript</span>
+      </div>
+      <div class="facts">
+        <span style="color:var(--pass)">18 passed</span>
+        <span style="color:var(--warn)">4 warnings</span>
+        <span style="color:var(--fail)">5 failed</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="card">
+          <header class="card-head"><h2>🎯 Fix these first</h2>
+          <span class="score-chip">sorted by points recoverable</span></header>
+          <ol class="fixes"><li>
+        <div class="fix-head"><span class="rank">1</span>
+          <strong>Issue templates</strong>
+          <span class="gain">+4.0 pts</span></div>
+        <div class="fix-now">No issue templates</div>
+        <div class="fix-hint">Add .github/ISSUE_TEMPLATE/bug_report.yml and feature_request.yml. GitHub has a one-click generator under Settings → Features → Issues.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">2</span>
+          <strong>Homepage / docs link</strong>
+          <span class="gain">+3.0 pts</span></div>
+        <div class="fix-now">No homepage URL</div>
+        <div class="fix-hint">Point it at your docs site, a live demo, or your project page. Even a GitHub Pages URL beats an empty field.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">3</span>
+          <strong>Social preview image</strong>
+          <span class="gain">+3.0 pts</span></div>
+        <div class="fix-now">Using GitHub&#39;s auto-generated social preview</div>
+        <div class="fix-hint">Upload a 1280×640 image under Settings → Social preview. It is the difference between a grey box and a click on X, Slack and Discord.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">4</span>
+          <strong>Pull request template</strong>
+          <span class="gain">+3.0 pts</span></div>
+        <div class="fix-now">No pull request template</div>
+        <div class="fix-hint">Add .github/PULL_REQUEST_TEMPLATE.md with: what changed, why, how it was tested, and a checklist.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">5</span>
+          <strong>README first impression</strong>
+          <span class="gain">+2.7 pts</span></div>
+        <div class="fix-now">Missing an H1 title, status badges (build, version, licence) in the first screenful</div>
+        <div class="fix-hint">Structure the top of your README as: H1 → one-line pitch → badges → a 5-line usage example.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">6</span>
+          <strong>Linter / formatter config</strong>
+          <span class="gain">+1.5 pts</span></div>
+        <div class="fix-now">Only .editorconfig found</div>
+        <div class="fix-hint">Pair a linter (catches bugs) with a formatter (settles style). Or use one tool that does both.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">7</span>
+          <strong>Repository name</strong>
+          <span class="gain">+1.2 pts</span></div>
+        <div class="fix-now">&quot;ky&quot;: too short to be searchable</div>
+        <div class="fix-hint">Best names are 2–3 lowercase words joined by hyphens and hint at what the tool does.</div>
+      </li>
+<li>
+        <div class="fix-head"><span class="rank">8</span>
+          <strong>Dependency manifest &amp; lockfile</strong>
+          <span class="gain">+1.0 pts</span></div>
+        <div class="fix-now">Manifest package.json present, no lockfile committed</div>
+        <div class="fix-hint">Commit the lockfile for applications and CLIs. Libraries may skip it, but should then pin ranges deliberately.</div>
+      </li></ol>
+        </section>
+
+  <section class="card">
+        <header class="card-head">
+          <h2>📖 Documentation</h2>
+          <span class="score-chip">24.1 / 25</span>
+        </header>
+        <p class="card-sub">Can a stranger install and use this without asking you?</p>
+        <div class="track"><div class="fill" style="width:96%"></div></div>
+        <table><tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">README file</td>
+            <td class="check-msg">README present (readme.md)</td>
+            <td class="pts">4.0<span class="dim">/4</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">README depth</td>
+            <td class="check-msg">63,196 characters, 85 heading(s)</td>
+            <td class="pts">5.0<span class="dim">/5</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Install &amp; usage instructions</td>
+            <td class="check-msg">Install + usage sections present, 70 code block(s)</td>
+            <td class="pts">5.0<span class="dim">/5</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Open-source licence</td>
+            <td class="check-msg">Licensed under MIT</td>
+            <td class="pts">5.0<span class="dim">/5</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Contributing guide</td>
+            <td class="check-msg">Contributing guide present</td>
+            <td class="pts">3.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill warn">WARN</span></td>
+            <td class="check-title">Changelog</td>
+            <td class="check-msg">No CHANGELOG file, but GitHub Releases carry written notes<div class="hint">Consider a CHANGELOG.md following https://keepachangelog.com so history is readable outside the Releases tab.</div></td>
+            <td class="pts">2.1<span class="dim">/3</span></td>
+          </tr></table>
+      </section>
+<section class="card">
+        <header class="card-head">
+          <h2>🔍 Discoverability</h2>
+          <span class="score-chip">14.9 / 25</span>
+        </header>
+        <p class="card-sub">Will anyone ever find it? Search metadata, topics, first impression.</p>
+        <div class="track"><div class="fill" style="width:60%"></div></div>
+        <table><tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Repository description</td>
+            <td class="check-msg">&quot;🌳 Tiny &amp; elegant JavaScript HTTP client based on the Fetch API&quot; (63 chars)</td>
+            <td class="pts">4.8<span class="dim">/5</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Topics</td>
+            <td class="check-msg">11 topics: fetch, http-client, http-request, javascript, js, json, npm-package, request</td>
+            <td class="pts">6.0<span class="dim">/6</span></td>
+          </tr>
+<tr>
+            <td><span class="pill fail">FAIL</span></td>
+            <td class="check-title">Homepage / docs link</td>
+            <td class="check-msg">No homepage URL<div class="hint">Point it at your docs site, a live demo, or your project page. Even a GitHub Pages URL beats an empty field.</div></td>
+            <td class="pts">0.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill fail">FAIL</span></td>
+            <td class="check-title">README first impression</td>
+            <td class="check-msg">Missing an H1 title, status badges (build, version, licence) in the first screenful<div class="hint">Structure the top of your README as: H1 → one-line pitch → badges → a 5-line usage example.</div></td>
+            <td class="pts">1.3<span class="dim">/4</span></td>
+          </tr>
+<tr>
+            <td><span class="pill fail">FAIL</span></td>
+            <td class="check-title">Social preview image</td>
+            <td class="check-msg">Using GitHub&#39;s auto-generated social preview<div class="hint">Upload a 1280×640 image under Settings → Social preview. It is the difference between a grey box and a click on X, Slack and Discord.</div></td>
+            <td class="pts">0.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill warn">WARN</span></td>
+            <td class="check-title">Repository name</td>
+            <td class="check-msg">&quot;ky&quot;: too short to be searchable<div class="hint">Best names are 2–3 lowercase words joined by hyphens and hint at what the tool does.</div></td>
+            <td class="pts">2.8<span class="dim">/4</span></td>
+          </tr></table>
+      </section>
+<section class="card">
+        <header class="card-head">
+          <h2>🛠️ Engineering</h2>
+          <span class="score-chip">17.5 / 20</span>
+        </header>
+        <p class="card-sub">CI, tests, and the hygiene that makes contributions safe to merge.</p>
+        <div class="track"><div class="fill" style="width:88%"></div></div>
+        <table><tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Continuous integration</td>
+            <td class="check-msg">2 active workflow(s): CI, Copilot code review</td>
+            <td class="pts">6.0<span class="dim">/6</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Test suite</td>
+            <td class="check-msg">Test suite detected (test)</td>
+            <td class="pts">5.0<span class="dim">/5</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">.gitignore</td>
+            <td class="check-msg">.gitignore present</td>
+            <td class="pts">2.0<span class="dim">/2</span></td>
+          </tr>
+<tr>
+            <td><span class="pill warn">WARN</span></td>
+            <td class="check-title">Dependency manifest &amp; lockfile</td>
+            <td class="check-msg">Manifest package.json present, no lockfile committed<div class="hint">Commit the lockfile for applications and CLIs. Libraries may skip it, but should then pin ranges deliberately.</div></td>
+            <td class="pts">1.0<span class="dim">/2</span></td>
+          </tr>
+<tr>
+            <td><span class="pill warn">WARN</span></td>
+            <td class="check-title">Linter / formatter config</td>
+            <td class="check-msg">Only .editorconfig found<div class="hint">Pair a linter (catches bugs) with a formatter (settles style). Or use one tool that does both.</div></td>
+            <td class="pts">1.5<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">.editorconfig</td>
+            <td class="check-msg">.editorconfig present</td>
+            <td class="pts">2.0<span class="dim">/2</span></td>
+          </tr></table>
+      </section>
+<section class="card">
+        <header class="card-head">
+          <h2>🤝 Community</h2>
+          <span class="score-chip">8.0 / 15</span>
+        </header>
+        <p class="card-sub">Is the project set up to receive help from other people?</p>
+        <div class="track"><div class="fill" style="width:53%"></div></div>
+        <table><tr>
+            <td><span class="pill fail">FAIL</span></td>
+            <td class="check-title">Issue templates</td>
+            <td class="check-msg">No issue templates<div class="hint">Add .github/ISSUE_TEMPLATE/bug_report.yml and feature_request.yml. GitHub has a one-click generator under Settings → Features → Issues.</div></td>
+            <td class="pts">0.0<span class="dim">/4</span></td>
+          </tr>
+<tr>
+            <td><span class="pill fail">FAIL</span></td>
+            <td class="check-title">Pull request template</td>
+            <td class="check-msg">No pull request template<div class="hint">Add .github/PULL_REQUEST_TEMPLATE.md with: what changed, why, how it was tested, and a checklist.</div></td>
+            <td class="pts">0.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Code of conduct</td>
+            <td class="check-msg">Code of conduct present</td>
+            <td class="pts">3.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Contributor base</td>
+            <td class="check-msg">100+ contributor(s)</td>
+            <td class="pts">3.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Support channel</td>
+            <td class="check-msg">GitHub Discussions enabled</td>
+            <td class="pts">2.0<span class="dim">/2</span></td>
+          </tr></table>
+      </section>
+<section class="card">
+        <header class="card-head">
+          <h2>💓 Maintenance</h2>
+          <span class="score-chip">14.4 / 15</span>
+        </header>
+        <p class="card-sub">Does it look alive? Commits, releases, backlog, repo status.</p>
+        <div class="track"><div class="fill" style="width:96%"></div></div>
+        <table><tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Recent commit activity</td>
+            <td class="check-msg">Last commit 28 days ago</td>
+            <td class="pts">4.8<span class="dim">/5</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Releases</td>
+            <td class="check-msg">Latest release v2.0.2, published 4 months ago</td>
+            <td class="pts">3.6<span class="dim">/4</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Issue backlog health</td>
+            <td class="check-msg">No open issues or pull requests</td>
+            <td class="pts">3.0<span class="dim">/3</span></td>
+          </tr>
+<tr>
+            <td><span class="pill pass">PASS</span></td>
+            <td class="check-title">Repository status</td>
+            <td class="check-msg">Active and accepting contributions</td>
+            <td class="pts">3.0<span class="dim">/3</span></td>
+          </tr></table>
+      </section>
+
+  <footer>
+    Generated by <a href="https://github.com/mornrain-lin/repo-radar">RepoRadar</a>
+    · 2026-08-04 17:00 UTC
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+# RepoRadar as a reusable GitHub Action.
+#
+# Drop this into any workflow to score the repository on every push, comment the
+# report on pull requests, or fail the build when quality regresses:
+#
+#   - uses: mornrain-lin/repo-radar@v1
+#     with:
+#       min-score: 75
+#
+# It is a "composite" action, which means it is just shell steps — no Docker
+# image to build, no JavaScript action to bundle. That keeps it fast (a few
+# seconds) and auditable (you can read every line that will run).
+
+name: RepoRadar
+description: Score a GitHub repository across 27 health and discoverability checks.
+author: mornrain.lin
+
+branding:
+  icon: radio
+  color: green
+
+inputs:
+  repository:
+    description: Repository to scan, as "owner/repo". Defaults to the current one.
+    required: false
+    default: ${{ github.repository }}
+  token:
+    description: >-
+      GitHub token used for API calls. The default GITHUB_TOKEN is enough for
+      public repositories and needs no extra permissions.
+    required: false
+    default: ${{ github.token }}
+  min-score:
+    description: Fail the job when the score falls below this value. Empty means never fail.
+    required: false
+    default: ''
+  format:
+    description: Report format — terminal, markdown, json, html or badge.
+    required: false
+    default: markdown
+  output:
+    description: Optional file path to write the report to.
+    required: false
+    default: ''
+  job-summary:
+    description: Publish the report to the workflow run summary page.
+    required: false
+    default: 'true'
+
+outputs:
+  score:
+    description: The total score, 0–100.
+    value: ${{ steps.scan.outputs.score }}
+  grade:
+    description: The letter grade, A+ through F.
+    value: ${{ steps.scan.outputs.grade }}
+  report:
+    description: Path of the generated report file, when `output` was set.
+    value: ${{ steps.scan.outputs.report }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Run RepoRadar
+      id: scan
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        INPUT_REPOSITORY: ${{ inputs.repository }}
+        INPUT_FORMAT: ${{ inputs.format }}
+        INPUT_OUTPUT: ${{ inputs.output }}
+        INPUT_MIN_SCORE: ${{ inputs.min-score }}
+        INPUT_JOB_SUMMARY: ${{ inputs.job-summary }}
+      run: |
+        set -euo pipefail
+
+        # Always produce JSON first so the outputs are machine-readable,
+        # independently of whichever human-facing format was requested.
+        npx --yes repo-radar "$INPUT_REPOSITORY" --format json --output radar.json
+
+        SCORE=$(node -p "require('./radar.json').score")
+        GRADE=$(node -p "require('./radar.json').grade")
+        echo "score=$SCORE" >> "$GITHUB_OUTPUT"
+        echo "grade=$GRADE" >> "$GITHUB_OUTPUT"
+        echo "RepoRadar: $SCORE/100 ($GRADE)"
+
+        if [ "$INPUT_FORMAT" != "json" ]; then
+          TARGET="${INPUT_OUTPUT:-radar-report.${INPUT_FORMAT}}"
+          npx --yes repo-radar "$INPUT_REPOSITORY" --format "$INPUT_FORMAT" --output "$TARGET"
+          echo "report=$TARGET" >> "$GITHUB_OUTPUT"
+
+          if [ "$INPUT_JOB_SUMMARY" = "true" ] && [ "$INPUT_FORMAT" = "markdown" ]; then
+            cat "$TARGET" >> "$GITHUB_STEP_SUMMARY"
+          fi
+        fi
+
+        # Threshold check runs last so the report is always published, even on failure.
+        if [ -n "$INPUT_MIN_SCORE" ]; then
+          if [ "$(node -p "Number('$SCORE') < Number('$INPUT_MIN_SCORE') ? 1 : 0")" = "1" ]; then
+            echo "::error::RepoRadar score $SCORE is below the required $INPUT_MIN_SCORE"
+            exit 1
+          fi
+        fi

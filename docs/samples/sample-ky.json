@@ -1,0 +1,909 @@
+{
+  "repository": "sindresorhus/ky",
+  "url": "https://github.com/sindresorhus/ky",
+  "description": "🌳 Tiny & elegant JavaScript HTTP client based on the Fetch API",
+  "score": 78.9,
+  "grade": "B",
+  "gradeLabel": "Solid",
+  "gradeColor": "#84cc16",
+  "dimensions": [
+    {
+      "key": "documentation",
+      "label": "Documentation",
+      "emoji": "📖",
+      "summary": "Can a stranger install and use this without asking you?",
+      "earned": 24.1,
+      "weight": 25,
+      "ratio": 0.9640000000000001,
+      "checks": [
+        {
+          "id": "readme-exists",
+          "dimension": "documentation",
+          "title": "README file",
+          "weight": 4,
+          "earned": 4,
+          "ratio": 1,
+          "status": "pass",
+          "message": "README present (readme.md)",
+          "why": "The README is the landing page of your project — GitHub renders it directly under the file list.",
+          "evidence": "readme.md"
+        },
+        {
+          "id": "readme-depth",
+          "dimension": "documentation",
+          "title": "README depth",
+          "weight": 5,
+          "earned": 5,
+          "ratio": 1,
+          "status": "pass",
+          "message": "63,196 characters, 85 heading(s)",
+          "why": "A README under ~800 characters cannot cover what the project is, how to install it, and how to use it.",
+          "evidence": {
+            "length": 63196,
+            "headings": 85
+          }
+        },
+        {
+          "id": "readme-quickstart",
+          "dimension": "documentation",
+          "title": "Install & usage instructions",
+          "weight": 5,
+          "earned": 5,
+          "ratio": 1,
+          "status": "pass",
+          "message": "Install + usage sections present, 70 code block(s)",
+          "why": "Runnable commands in the first screenful are what turn a visitor into a user.",
+          "evidence": {
+            "codeBlocks": 70
+          }
+        },
+        {
+          "id": "license",
+          "dimension": "documentation",
+          "title": "Open-source licence",
+          "weight": 5,
+          "earned": 5,
+          "ratio": 1,
+          "status": "pass",
+          "message": "Licensed under MIT",
+          "why": "Without a licence, default copyright applies: legally, nobody may use your code. Companies will not touch it.",
+          "evidence": "MIT"
+        },
+        {
+          "id": "contributing-guide",
+          "dimension": "documentation",
+          "title": "Contributing guide",
+          "weight": 3,
+          "earned": 3,
+          "ratio": 1,
+          "status": "pass",
+          "message": "Contributing guide present",
+          "why": "CONTRIBUTING.md is linked automatically by GitHub whenever someone opens an issue or a pull request.",
+          "evidence": "via community profile"
+        },
+        {
+          "id": "changelog",
+          "dimension": "documentation",
+          "title": "Changelog",
+          "weight": 3,
+          "earned": 2.1,
+          "ratio": 0.7,
+          "status": "warn",
+          "message": "No CHANGELOG file, but GitHub Releases carry written notes",
+          "hint": "Consider a CHANGELOG.md following https://keepachangelog.com so history is readable outside the Releases tab.",
+          "why": "Users upgrading across versions need to know what changed — especially what broke."
+        }
+      ]
+    },
+    {
+      "key": "discoverability",
+      "label": "Discoverability",
+      "emoji": "🔍",
+      "summary": "Will anyone ever find it? Search metadata, topics, first impression.",
+      "earned": 14.88,
+      "weight": 25,
+      "ratio": 0.5952,
+      "checks": [
+        {
+          "id": "description",
+          "dimension": "discoverability",
+          "title": "Repository description",
+          "weight": 5,
+          "earned": 4.75,
+          "ratio": 0.95,
+          "status": "pass",
+          "message": "\"🌳 Tiny & elegant JavaScript HTTP client based on the Fetch API\" (63 chars)",
+          "why": "The description is the strongest ranking signal in GitHub search and the meta description Google shows.",
+          "evidence": "🌳 Tiny & elegant JavaScript HTTP client based on the Fetch API"
+        },
+        {
+          "id": "topics",
+          "dimension": "discoverability",
+          "title": "Topics",
+          "weight": 6,
+          "earned": 6,
+          "ratio": 1,
+          "status": "pass",
+          "message": "11 topics: fetch, http-client, http-request, javascript, js, json, npm-package, request",
+          "why": "Topics are GitHub's tag system: they drive the /topics browse pages, \"related repositories\", and a big share of organic discovery.",
+          "evidence": [
+            "fetch",
+            "http-client",
+            "http-request",
+            "javascript",
+            "js",
+            "json",
+            "npm-package",
+            "request",
+            "rest",
+            "tiny",
+            "whatwg-fetch"
+          ]
+        },
+        {
+          "id": "homepage",
+          "dimension": "discoverability",
+          "title": "Homepage / docs link",
+          "weight": 3,
+          "earned": 0,
+          "ratio": 0,
+          "status": "fail",
+          "message": "No homepage URL",
+          "hint": "Point it at your docs site, a live demo, or your project page. Even a GitHub Pages URL beats an empty field.",
+          "why": "The homepage field renders as a clickable link in the sidebar and is one of the few outbound signals GitHub gives you."
+        },
+        {
+          "id": "readme-headline",
+          "dimension": "discoverability",
+          "title": "README first impression",
+          "weight": 4,
+          "earned": 1.33,
+          "ratio": 0.3333333333333333,
+          "status": "fail",
+          "message": "Missing an H1 title, status badges (build, version, licence) in the first screenful",
+          "hint": "Structure the top of your README as: H1 → one-line pitch → badges → a 5-line usage example.",
+          "why": "Visitors decide in about eight seconds. A title, a one-line pitch and status badges are what they scan.",
+          "evidence": {
+            "hasTitle": false,
+            "hasTagline": true,
+            "hasBadge": false
+          }
+        },
+        {
+          "id": "social-preview",
+          "dimension": "discoverability",
+          "title": "Social preview image",
+          "weight": 3,
+          "earned": 0,
+          "ratio": 0,
+          "status": "fail",
+          "message": "Using GitHub's auto-generated social preview",
+          "hint": "Upload a 1280×640 image under Settings → Social preview. It is the difference between a grey box and a click on X, Slack and Discord.",
+          "why": "This is the og:image for every share of your repo. Without it, links render as an anonymous grey card."
+        },
+        {
+          "id": "repo-name-quality",
+          "dimension": "discoverability",
+          "title": "Repository name",
+          "weight": 4,
+          "earned": 2.8,
+          "ratio": 0.7,
+          "status": "warn",
+          "message": "\"ky\": too short to be searchable",
+          "hint": "Best names are 2–3 lowercase words joined by hyphens and hint at what the tool does.",
+          "why": "The name is the URL, the npm/PyPI package name, and the thing people have to remember and type.",
+          "evidence": {
+            "name": "ky",
+            "issues": [
+              "too short to be searchable"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "key": "engineering",
+      "label": "Engineering",
+      "emoji": "🛠️",
+      "summary": "CI, tests, and the hygiene that makes contributions safe to merge.",
+      "earned": 17.5,
+      "weight": 20,
+      "ratio": 0.875,
+      "checks": [
+        {
+          "id": "ci-workflow",
+          "dimension": "engineering",
+          "title": "Continuous integration",
+          "weight": 6,
+          "earned": 6,
+          "ratio": 1,
+          "status": "pass",
+          "message": "2 active workflow(s): CI, Copilot code review",
+          "why": "Without CI, every pull request is a leap of faith — for you and for the contributor.",
+          "evidence": [
+            "CI",
+            "Copilot code review"
+          ]
+        },
+        {
+          "id": "tests",
+          "dimension": "engineering",
+          "title": "Test suite",
+          "weight": 5,
+          "earned": 5,
+          "ratio": 1,
+          "status": "pass",
+          "message": "Test suite detected (test)",
+          "why": "Tests are how a stranger verifies their change did not break anything — they are a contribution enabler, not just a safety net.",
+          "evidence": "test"
+        },
+        {
+          "id": "gitignore",
+          "dimension": "engineering",
+          "title": ".gitignore",
+          "weight": 2,
+          "earned": 2,
+          "ratio": 1,
+          "status": "pass",
+          "message": ".gitignore present",
+          "why": "A missing .gitignore is how node_modules, .env files and API keys end up in git history."
+        },
+        {
+          "id": "dependency-manifest",
+          "dimension": "engineering",
+          "title": "Dependency manifest & lockfile",
+          "weight": 2,
+          "earned": 1,
+          "ratio": 0.5,
+          "status": "warn",
+          "message": "Manifest package.json present, no lockfile committed",
+          "hint": "Commit the lockfile for applications and CLIs. Libraries may skip it, but should then pin ranges deliberately.",
+          "why": "Reproducible installs are the difference between \"works on my machine\" and \"works\"."
+        },
+        {
+          "id": "linter-config",
+          "dimension": "engineering",
+          "title": "Linter / formatter config",
+          "weight": 3,
+          "earned": 1.5,
+          "ratio": 0.5,
+          "status": "warn",
+          "message": "Only .editorconfig found",
+          "hint": "Pair a linter (catches bugs) with a formatter (settles style). Or use one tool that does both.",
+          "why": "A committed formatter config ends style debates in code review before they start.",
+          "evidence": [
+            ".editorconfig"
+          ]
+        },
+        {
+          "id": "editorconfig",
+          "dimension": "engineering",
+          "title": ".editorconfig",
+          "weight": 2,
+          "earned": 2,
+          "ratio": 1,
+          "status": "pass",
+          "message": ".editorconfig present",
+          "why": "It makes indentation and line endings consistent across every editor, with zero setup from the contributor."
+        }
+      ]
+    },
+    {
+      "key": "community",
+      "label": "Community",
+      "emoji": "🤝",
+      "summary": "Is the project set up to receive help from other people?",
+      "earned": 8,
+      "weight": 15,
+      "ratio": 0.5333333333333333,
+      "checks": [
+        {
+          "id": "issue-template",
+          "dimension": "community",
+          "title": "Issue templates",
+          "weight": 4,
+          "earned": 0,
+          "ratio": 0,
+          "status": "fail",
+          "message": "No issue templates",
+          "hint": "Add .github/ISSUE_TEMPLATE/bug_report.yml and feature_request.yml. GitHub has a one-click generator under Settings → Features → Issues.",
+          "why": "Templates turn \"it doesn't work\" into a reproducible report, and save the maintainer a round trip on every single issue."
+        },
+        {
+          "id": "pr-template",
+          "dimension": "community",
+          "title": "Pull request template",
+          "weight": 3,
+          "earned": 0,
+          "ratio": 0,
+          "status": "fail",
+          "message": "No pull request template",
+          "hint": "Add .github/PULL_REQUEST_TEMPLATE.md with: what changed, why, how it was tested, and a checklist.",
+          "why": "A checklist in the PR body is the cheapest way to get contributors to run the tests before asking for review."
+        },
+        {
+          "id": "code-of-conduct",
+          "dimension": "community",
+          "title": "Code of conduct",
+          "weight": 3,
+          "earned": 3,
+          "ratio": 1,
+          "status": "pass",
+          "message": "Code of conduct present",
+          "why": "It sets expectations before a conflict happens and gives you something to point at when one does."
+        },
+        {
+          "id": "contributor-base",
+          "dimension": "community",
+          "title": "Contributor base",
+          "weight": 3,
+          "earned": 3,
+          "ratio": 1,
+          "status": "pass",
+          "message": "100+ contributor(s)",
+          "why": "A bus factor of one is the most common reason good projects die.",
+          "evidence": 100
+        },
+        {
+          "id": "discussions-or-support",
+          "dimension": "community",
+          "title": "Support channel",
+          "weight": 2,
+          "earned": 2,
+          "ratio": 1,
+          "status": "pass",
+          "message": "GitHub Discussions enabled",
+          "why": "Without a place for questions, your issue tracker becomes one — and real bugs get buried."
+        }
+      ]
+    },
+    {
+      "key": "maintenance",
+      "label": "Maintenance",
+      "emoji": "💓",
+      "summary": "Does it look alive? Commits, releases, backlog, repo status.",
+      "earned": 14.43,
+      "weight": 15,
+      "ratio": 0.962,
+      "checks": [
+        {
+          "id": "recent-activity",
+          "dimension": "maintenance",
+          "title": "Recent commit activity",
+          "weight": 5,
+          "earned": 4.8,
+          "ratio": 0.9601139601139601,
+          "status": "pass",
+          "message": "Last commit 28 days ago",
+          "why": "A repo untouched for a year reads as abandoned, whether or not it is finished.",
+          "evidence": 28
+        },
+        {
+          "id": "release-cadence",
+          "dimension": "maintenance",
+          "title": "Releases",
+          "weight": 4,
+          "earned": 3.63,
+          "ratio": 0.90625,
+          "status": "pass",
+          "message": "Latest release v2.0.2, published 4 months ago",
+          "why": "Tagged releases let people depend on a version instead of a moving branch.",
+          "evidence": {
+            "tag": "v2.0.2",
+            "days": 105
+          }
+        },
+        {
+          "id": "issue-backlog",
+          "dimension": "maintenance",
+          "title": "Issue backlog health",
+          "weight": 3,
+          "earned": 3,
+          "ratio": 1,
+          "status": "pass",
+          "message": "No open issues or pull requests",
+          "why": "A backlog that grows faster than the star count signals a maintainer who has stopped responding."
+        },
+        {
+          "id": "active-status",
+          "dimension": "maintenance",
+          "title": "Repository status",
+          "weight": 3,
+          "earned": 3,
+          "ratio": 1,
+          "status": "pass",
+          "message": "Active and accepting contributions",
+          "why": "Archived, disabled or template repositories cannot accept the contributions your README invites."
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "readme-exists",
+      "dimension": "documentation",
+      "title": "README file",
+      "weight": 4,
+      "earned": 4,
+      "ratio": 1,
+      "status": "pass",
+      "message": "README present (readme.md)",
+      "why": "The README is the landing page of your project — GitHub renders it directly under the file list.",
+      "evidence": "readme.md"
+    },
+    {
+      "id": "readme-depth",
+      "dimension": "documentation",
+      "title": "README depth",
+      "weight": 5,
+      "earned": 5,
+      "ratio": 1,
+      "status": "pass",
+      "message": "63,196 characters, 85 heading(s)",
+      "why": "A README under ~800 characters cannot cover what the project is, how to install it, and how to use it.",
+      "evidence": {
+        "length": 63196,
+        "headings": 85
+      }
+    },
+    {
+      "id": "readme-quickstart",
+      "dimension": "documentation",
+      "title": "Install & usage instructions",
+      "weight": 5,
+      "earned": 5,
+      "ratio": 1,
+      "status": "pass",
+      "message": "Install + usage sections present, 70 code block(s)",
+      "why": "Runnable commands in the first screenful are what turn a visitor into a user.",
+      "evidence": {
+        "codeBlocks": 70
+      }
+    },
+    {
+      "id": "license",
+      "dimension": "documentation",
+      "title": "Open-source licence",
+      "weight": 5,
+      "earned": 5,
+      "ratio": 1,
+      "status": "pass",
+      "message": "Licensed under MIT",
+      "why": "Without a licence, default copyright applies: legally, nobody may use your code. Companies will not touch it.",
+      "evidence": "MIT"
+    },
+    {
+      "id": "contributing-guide",
+      "dimension": "documentation",
+      "title": "Contributing guide",
+      "weight": 3,
+      "earned": 3,
+      "ratio": 1,
+      "status": "pass",
+      "message": "Contributing guide present",
+      "why": "CONTRIBUTING.md is linked automatically by GitHub whenever someone opens an issue or a pull request.",
+      "evidence": "via community profile"
+    },
+    {
+      "id": "changelog",
+      "dimension": "documentation",
+      "title": "Changelog",
+      "weight": 3,
+      "earned": 2.1,
+      "ratio": 0.7,
+      "status": "warn",
+      "message": "No CHANGELOG file, but GitHub Releases carry written notes",
+      "hint": "Consider a CHANGELOG.md following https://keepachangelog.com so history is readable outside the Releases tab.",
+      "why": "Users upgrading across versions need to know what changed — especially what broke."
+    },
+    {
+      "id": "description",
+      "dimension": "discoverability",
+      "title": "Repository description",
+      "weight": 5,
+      "earned": 4.75,
+      "ratio": 0.95,
+      "status": "pass",
+      "message": "\"🌳 Tiny & elegant JavaScript HTTP client based on the Fetch API\" (63 chars)",
+      "why": "The description is the strongest ranking signal in GitHub search and the meta description Google shows.",
+      "evidence": "🌳 Tiny & elegant JavaScript HTTP client based on the Fetch API"
+    },
+    {
+      "id": "topics",
+      "dimension": "discoverability",
+      "title": "Topics",
+      "weight": 6,
+      "earned": 6,
+      "ratio": 1,
+      "status": "pass",
+      "message": "11 topics: fetch, http-client, http-request, javascript, js, json, npm-package, request",
+      "why": "Topics are GitHub's tag system: they drive the /topics browse pages, \"related repositories\", and a big share of organic discovery.",
+      "evidence": [
+        "fetch",
+        "http-client",
+        "http-request",
+        "javascript",
+        "js",
+        "json",
+        "npm-package",
+        "request",
+        "rest",
+        "tiny",
+        "whatwg-fetch"
+      ]
+    },
+    {
+      "id": "homepage",
+      "dimension": "discoverability",
+      "title": "Homepage / docs link",
+      "weight": 3,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "No homepage URL",
+      "hint": "Point it at your docs site, a live demo, or your project page. Even a GitHub Pages URL beats an empty field.",
+      "why": "The homepage field renders as a clickable link in the sidebar and is one of the few outbound signals GitHub gives you."
+    },
+    {
+      "id": "readme-headline",
+      "dimension": "discoverability",
+      "title": "README first impression",
+      "weight": 4,
+      "earned": 1.33,
+      "ratio": 0.3333333333333333,
+      "status": "fail",
+      "message": "Missing an H1 title, status badges (build, version, licence) in the first screenful",
+      "hint": "Structure the top of your README as: H1 → one-line pitch → badges → a 5-line usage example.",
+      "why": "Visitors decide in about eight seconds. A title, a one-line pitch and status badges are what they scan.",
+      "evidence": {
+        "hasTitle": false,
+        "hasTagline": true,
+        "hasBadge": false
+      }
+    },
+    {
+      "id": "social-preview",
+      "dimension": "discoverability",
+      "title": "Social preview image",
+      "weight": 3,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "Using GitHub's auto-generated social preview",
+      "hint": "Upload a 1280×640 image under Settings → Social preview. It is the difference between a grey box and a click on X, Slack and Discord.",
+      "why": "This is the og:image for every share of your repo. Without it, links render as an anonymous grey card."
+    },
+    {
+      "id": "repo-name-quality",
+      "dimension": "discoverability",
+      "title": "Repository name",
+      "weight": 4,
+      "earned": 2.8,
+      "ratio": 0.7,
+      "status": "warn",
+      "message": "\"ky\": too short to be searchable",
+      "hint": "Best names are 2–3 lowercase words joined by hyphens and hint at what the tool does.",
+      "why": "The name is the URL, the npm/PyPI package name, and the thing people have to remember and type.",
+      "evidence": {
+        "name": "ky",
+        "issues": [
+          "too short to be searchable"
+        ]
+      }
+    },
+    {
+      "id": "ci-workflow",
+      "dimension": "engineering",
+      "title": "Continuous integration",
+      "weight": 6,
+      "earned": 6,
+      "ratio": 1,
+      "status": "pass",
+      "message": "2 active workflow(s): CI, Copilot code review",
+      "why": "Without CI, every pull request is a leap of faith — for you and for the contributor.",
+      "evidence": [
+        "CI",
+        "Copilot code review"
+      ]
+    },
+    {
+      "id": "tests",
+      "dimension": "engineering",
+      "title": "Test suite",
+      "weight": 5,
+      "earned": 5,
+      "ratio": 1,
+      "status": "pass",
+      "message": "Test suite detected (test)",
+      "why": "Tests are how a stranger verifies their change did not break anything — they are a contribution enabler, not just a safety net.",
+      "evidence": "test"
+    },
+    {
+      "id": "gitignore",
+      "dimension": "engineering",
+      "title": ".gitignore",
+      "weight": 2,
+      "earned": 2,
+      "ratio": 1,
+      "status": "pass",
+      "message": ".gitignore present",
+      "why": "A missing .gitignore is how node_modules, .env files and API keys end up in git history."
+    },
+    {
+      "id": "dependency-manifest",
+      "dimension": "engineering",
+      "title": "Dependency manifest & lockfile",
+      "weight": 2,
+      "earned": 1,
+      "ratio": 0.5,
+      "status": "warn",
+      "message": "Manifest package.json present, no lockfile committed",
+      "hint": "Commit the lockfile for applications and CLIs. Libraries may skip it, but should then pin ranges deliberately.",
+      "why": "Reproducible installs are the difference between \"works on my machine\" and \"works\"."
+    },
+    {
+      "id": "linter-config",
+      "dimension": "engineering",
+      "title": "Linter / formatter config",
+      "weight": 3,
+      "earned": 1.5,
+      "ratio": 0.5,
+      "status": "warn",
+      "message": "Only .editorconfig found",
+      "hint": "Pair a linter (catches bugs) with a formatter (settles style). Or use one tool that does both.",
+      "why": "A committed formatter config ends style debates in code review before they start.",
+      "evidence": [
+        ".editorconfig"
+      ]
+    },
+    {
+      "id": "editorconfig",
+      "dimension": "engineering",
+      "title": ".editorconfig",
+      "weight": 2,
+      "earned": 2,
+      "ratio": 1,
+      "status": "pass",
+      "message": ".editorconfig present",
+      "why": "It makes indentation and line endings consistent across every editor, with zero setup from the contributor."
+    },
+    {
+      "id": "issue-template",
+      "dimension": "community",
+      "title": "Issue templates",
+      "weight": 4,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "No issue templates",
+      "hint": "Add .github/ISSUE_TEMPLATE/bug_report.yml and feature_request.yml. GitHub has a one-click generator under Settings → Features → Issues.",
+      "why": "Templates turn \"it doesn't work\" into a reproducible report, and save the maintainer a round trip on every single issue."
+    },
+    {
+      "id": "pr-template",
+      "dimension": "community",
+      "title": "Pull request template",
+      "weight": 3,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "No pull request template",
+      "hint": "Add .github/PULL_REQUEST_TEMPLATE.md with: what changed, why, how it was tested, and a checklist.",
+      "why": "A checklist in the PR body is the cheapest way to get contributors to run the tests before asking for review."
+    },
+    {
+      "id": "code-of-conduct",
+      "dimension": "community",
+      "title": "Code of conduct",
+      "weight": 3,
+      "earned": 3,
+      "ratio": 1,
+      "status": "pass",
+      "message": "Code of conduct present",
+      "why": "It sets expectations before a conflict happens and gives you something to point at when one does."
+    },
+    {
+      "id": "contributor-base",
+      "dimension": "community",
+      "title": "Contributor base",
+      "weight": 3,
+      "earned": 3,
+      "ratio": 1,
+      "status": "pass",
+      "message": "100+ contributor(s)",
+      "why": "A bus factor of one is the most common reason good projects die.",
+      "evidence": 100
+    },
+    {
+      "id": "discussions-or-support",
+      "dimension": "community",
+      "title": "Support channel",
+      "weight": 2,
+      "earned": 2,
+      "ratio": 1,
+      "status": "pass",
+      "message": "GitHub Discussions enabled",
+      "why": "Without a place for questions, your issue tracker becomes one — and real bugs get buried."
+    },
+    {
+      "id": "recent-activity",
+      "dimension": "maintenance",
+      "title": "Recent commit activity",
+      "weight": 5,
+      "earned": 4.8,
+      "ratio": 0.9601139601139601,
+      "status": "pass",
+      "message": "Last commit 28 days ago",
+      "why": "A repo untouched for a year reads as abandoned, whether or not it is finished.",
+      "evidence": 28
+    },
+    {
+      "id": "release-cadence",
+      "dimension": "maintenance",
+      "title": "Releases",
+      "weight": 4,
+      "earned": 3.63,
+      "ratio": 0.90625,
+      "status": "pass",
+      "message": "Latest release v2.0.2, published 4 months ago",
+      "why": "Tagged releases let people depend on a version instead of a moving branch.",
+      "evidence": {
+        "tag": "v2.0.2",
+        "days": 105
+      }
+    },
+    {
+      "id": "issue-backlog",
+      "dimension": "maintenance",
+      "title": "Issue backlog health",
+      "weight": 3,
+      "earned": 3,
+      "ratio": 1,
+      "status": "pass",
+      "message": "No open issues or pull requests",
+      "why": "A backlog that grows faster than the star count signals a maintainer who has stopped responding."
+    },
+    {
+      "id": "active-status",
+      "dimension": "maintenance",
+      "title": "Repository status",
+      "weight": 3,
+      "earned": 3,
+      "ratio": 1,
+      "status": "pass",
+      "message": "Active and accepting contributions",
+      "why": "Archived, disabled or template repositories cannot accept the contributions your README invites."
+    }
+  ],
+  "topFixes": [
+    {
+      "id": "issue-template",
+      "dimension": "community",
+      "title": "Issue templates",
+      "weight": 4,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "No issue templates",
+      "hint": "Add .github/ISSUE_TEMPLATE/bug_report.yml and feature_request.yml. GitHub has a one-click generator under Settings → Features → Issues.",
+      "why": "Templates turn \"it doesn't work\" into a reproducible report, and save the maintainer a round trip on every single issue.",
+      "lost": 4
+    },
+    {
+      "id": "homepage",
+      "dimension": "discoverability",
+      "title": "Homepage / docs link",
+      "weight": 3,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "No homepage URL",
+      "hint": "Point it at your docs site, a live demo, or your project page. Even a GitHub Pages URL beats an empty field.",
+      "why": "The homepage field renders as a clickable link in the sidebar and is one of the few outbound signals GitHub gives you.",
+      "lost": 3
+    },
+    {
+      "id": "social-preview",
+      "dimension": "discoverability",
+      "title": "Social preview image",
+      "weight": 3,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "Using GitHub's auto-generated social preview",
+      "hint": "Upload a 1280×640 image under Settings → Social preview. It is the difference between a grey box and a click on X, Slack and Discord.",
+      "why": "This is the og:image for every share of your repo. Without it, links render as an anonymous grey card.",
+      "lost": 3
+    },
+    {
+      "id": "pr-template",
+      "dimension": "community",
+      "title": "Pull request template",
+      "weight": 3,
+      "earned": 0,
+      "ratio": 0,
+      "status": "fail",
+      "message": "No pull request template",
+      "hint": "Add .github/PULL_REQUEST_TEMPLATE.md with: what changed, why, how it was tested, and a checklist.",
+      "why": "A checklist in the PR body is the cheapest way to get contributors to run the tests before asking for review.",
+      "lost": 3
+    },
+    {
+      "id": "readme-headline",
+      "dimension": "discoverability",
+      "title": "README first impression",
+      "weight": 4,
+      "earned": 1.33,
+      "ratio": 0.3333333333333333,
+      "status": "fail",
+      "message": "Missing an H1 title, status badges (build, version, licence) in the first screenful",
+      "hint": "Structure the top of your README as: H1 → one-line pitch → badges → a 5-line usage example.",
+      "why": "Visitors decide in about eight seconds. A title, a one-line pitch and status badges are what they scan.",
+      "evidence": {
+        "hasTitle": false,
+        "hasTagline": true,
+        "hasBadge": false
+      },
+      "lost": 2.67
+    },
+    {
+      "id": "linter-config",
+      "dimension": "engineering",
+      "title": "Linter / formatter config",
+      "weight": 3,
+      "earned": 1.5,
+      "ratio": 0.5,
+      "status": "warn",
+      "message": "Only .editorconfig found",
+      "hint": "Pair a linter (catches bugs) with a formatter (settles style). Or use one tool that does both.",
+      "why": "A committed formatter config ends style debates in code review before they start.",
+      "evidence": [
+        ".editorconfig"
+      ],
+      "lost": 1.5
+    },
+    {
+      "id": "repo-name-quality",
+      "dimension": "discoverability",
+      "title": "Repository name",
+      "weight": 4,
+      "earned": 2.8,
+      "ratio": 0.7,
+      "status": "warn",
+      "message": "\"ky\": too short to be searchable",
+      "hint": "Best names are 2–3 lowercase words joined by hyphens and hint at what the tool does.",
+      "why": "The name is the URL, the npm/PyPI package name, and the thing people have to remember and type.",
+      "evidence": {
+        "name": "ky",
+        "issues": [
+          "too short to be searchable"
+        ]
+      },
+      "lost": 1.2
+    },
+    {
+      "id": "dependency-manifest",
+      "dimension": "engineering",
+      "title": "Dependency manifest & lockfile",
+      "weight": 2,
+      "earned": 1,
+      "ratio": 0.5,
+      "status": "warn",
+      "message": "Manifest package.json present, no lockfile committed",
+      "hint": "Commit the lockfile for applications and CLIs. Libraries may skip it, but should then pin ranges deliberately.",
+      "why": "Reproducible installs are the difference between \"works on my machine\" and \"works\".",
+      "lost": 1
+    }
+  ],
+  "stats": {
+    "stars": 17011,
+    "forks": 485,
+    "watchers": 59,
+    "openIssues": 0,
+    "language": "TypeScript",
+    "createdAt": "2018-09-04T16:26:42Z",
+    "pushedAt": "2026-07-06T22:20:40Z",
+    "scannedAt": "2026-08-04T17:00:40.707Z"
+  },
+  "warnings": []
+}

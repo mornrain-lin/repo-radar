@@ -1,0 +1,52 @@
+name: Feature request
+description: Suggest a new capability or a new check.
+title: '[Feature] '
+labels: ['enhancement']
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Proposing a **new check**? Please make the case for it here before
+        writing code — every check spends part of a fixed 100-point budget, so
+        adding one means re-balancing the others.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the situation you hit, not the solution you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of change is this?
+      options:
+        - A new check
+        - A new output format
+        - A CLI option
+        - Library API
+        - Documentation
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: dimension
+    attributes:
+      label: For a new check — which dimension, and what weight?
+      placeholder: 'discoverability, 3 points (taken from topics)'
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered

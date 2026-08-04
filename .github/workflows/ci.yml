@@ -1,0 +1,89 @@
+# Continuous integration.
+#
+# Deliberately boring and fast: no build step, no dependency install (the
+# project has zero runtime and zero dev dependencies), so a full matrix run
+# finishes in well under a minute.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancel an in-flight run when a new commit lands on the same branch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test — Node ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # 18 is the minimum we claim to support; 22 is current LTS.
+        # Testing both ends catches "works on my Node" bugs.
+        node: ['18', '20', '22']
+        os: [ubuntu-latest]
+        include:
+          - node: '22'
+            os: windows-latest
+          - node: '22'
+            os: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Verify every source file parses
+        run: |
+          for file in $(find bin src test examples -name '*.js'); do
+            node --check "$file"
+          done
+        shell: bash
+
+      - name: Run tests
+        run: node --test "test/*.test.js"
+
+      - name: Smoke-test the CLI
+        run: |
+          node bin/repo-radar.js --version
+          node bin/repo-radar.js --help
+          node bin/repo-radar.js --list-checks
+        shell: bash
+
+  self-scan:
+    name: Scan our own repository
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Dogfooding. If RepoRadar cannot keep its own score above 90, the advice
+      # it gives everyone else is not credible.
+      - name: RepoRadar self-check
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node bin/repo-radar.js "$GITHUB_REPOSITORY" --min-score 90 --verbose
+
+      - name: Publish report to the job summary
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node bin/repo-radar.js "$GITHUB_REPOSITORY" --format markdown >> "$GITHUB_STEP_SUMMARY"

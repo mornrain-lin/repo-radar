@@ -1,0 +1,65 @@
+{
+  "name": "repo-radar",
+  "version": "1.0.0",
+  "description": "Health & discoverability scanner for GitHub repositories. Scores any repo across 27 checks in 5 dimensions and tells you exactly what to fix to get more stars.",
+  "keywords": [
+    "github",
+    "github-api",
+    "repository",
+    "health-check",
+    "open-source",
+    "linter",
+    "cli",
+    "audit",
+    "seo",
+    "devtools",
+    "maintainer-tools",
+    "zero-dependency"
+  ],
+  "homepage": "https://mornrain.com",
+  "bugs": {
+    "url": "https://github.com/mornrain-lin/repo-radar/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mornrain-lin/repo-radar.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "mornrain.lin",
+    "url": "https://mornrain.com"
+  },
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./checks": "./src/checks/index.js",
+    "./report": "./src/report/index.js"
+  },
+  "bin": {
+    "repo-radar": "./bin/repo-radar.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "start": "node bin/repo-radar.js",
+    "test": "node --test \"test/*.test.js\"",
+    "test:watch": "node --test --watch \"test/*.test.js\"",
+    "test:coverage": "node --test --experimental-test-coverage \"test/*.test.js\"",
+    "demo": "node bin/repo-radar.js nodejs/node",
+    "example": "node examples/01-basic-scan.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}
